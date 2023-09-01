@@ -10,31 +10,29 @@ UPLOAD=100
 
 class VelocidadeInternet:
     def __init__(self,driver_path):
-        # self.down=DOWNLOAD
-        # self.up=UPLOAD
         self.driver=webdriver.Chrome(executable_path=driver_path)
         self.download_atual=0
         self.upload_atual=0
-    # def get_vel_internet(self):
-    #     self.driver.get('https://www.speedtest.net')
-    #     sleep(3)
-    #     element = self.driver.find_element(By.ID, value='onetrust-accept-btn-handler')
-    #     element.click()
-    #     sleep(1.5)
-    #     start = self.driver.find_element_by_css_selector('.test-mode-multi')
-    #     start.click()
-    #     sleep(50)
-    #     close_window=self.driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[8]/div/div/div[2]/a')
-    #     close_window.click()
-    #     download_speed=self.driver.find_element(By.CLASS_NAME,'download-speed').text
-    #     self.download_atual = float(download_speed)
-    #     up_speed=self.driver.find_element(By.CLASS_NAME,'upload-speed').text
-    #     self.upload_atual=float(up_speed)
-    #     self.driver.quit()
+     def get_vel_internet(self):
+        self.driver.get('https://www.speedtest.net')
+        sleep(3)
+        element = self.driver.find_element(By.ID, value='onetrust-accept-btn-handler')
+        element.click()
+        sleep(1.5)
+        start = self.driver.find_element_by_css_selector('.test-mode-multi')
+        start.click()
+        sleep(50)
+        close_window=self.driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[3]/div/div[8]/div/div/div[2]/a')
+        close_window.click()
+        download_speed=self.driver.find_element(By.CLASS_NAME,'download-speed').text
+        self.download_atual = float(download_speed)
+        up_speed=self.driver.find_element(By.CLASS_NAME,'upload-speed').text
+        self.upload_atual=float(up_speed)
+        self.driver.quit()
 
     def login_twitter(self):
-        EMAIL = 'jhonasferreira1@hotmail.com'
-        SENHA = '23jh23jh'
+        EMAIL = ''
+        SENHA = 1'
         self.driver.get(url='https://twitter.com')
         sleep(2)
         btn_login = self.driver.find_element_by_css_selector('.r-2o02ov a')
