@@ -32,7 +32,7 @@ class VelocidadeInternet:
 
     def login_twitter(self):
         EMAIL = ''
-        SENHA = 1'
+        SENHA = ''
         self.driver.get(url='https://twitter.com')
         sleep(2)
         btn_login = self.driver.find_element_by_css_selector('.r-2o02ov a')
