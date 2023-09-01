@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 #Variavel Selenium
-
+chrome_drive_path='C:\DesenvolvimentoPy\chromedriver.exe'
 
 #Header
 header={
@@ -20,9 +20,10 @@ data_aluguel=requests.get(url_zapimoveis,headers=header)
 data_aluguel.raise_for_status()
 sopa=BeautifulSoup(data_aluguel.text,'lxml')
 
+#Selecionando as divs que possuem informações do imóvel 
 lista_alugueis=sopa.select(selector='.listing-wrapper__content div .result-card')
 
-
+#Selecionando os atributos das Div's: Preço,endereço e Link referente a postagem.
 lista_enderecos=[(endereco.find(name='h2').text,endereco.find('p').text) for endereco in lista_alugueis[::2]]
 print(lista_enderecos)
 lista_valores=[val.select_one(selector='.listing-price p').text.replace('Total ','') for val in lista_alugueis[::2]]
@@ -30,21 +31,26 @@ print(lista_valores)
 lista_links=[aluguel.get('href') for aluguel in lista_alugueis[1::2]]
 print(lista_links)
 
-url_form='https://docs.google.com/forms/d/e/1FAIpQLSeEamtiX69ybXeNCtc2O-Ul6ebbpzEbfiEOm0VbeCULpcgfLQ/viewform?usp=sf_link'
-chrome_drive_path='C:\DesenvolvimentoPy\chromedriver.exe'
 
+#Url Forms
+url_form='https://docs.google.com/forms/d/e/1FAIpQLSeEamtiX69ybXeNCtc2O-Ul6ebbpzEbfiEOm0VbeCULpcgfLQ/viewform?usp=sf_link'
+
+#iniciando o Driver
 driver=webdriver.Chrome(executable_path=chrome_drive_path)
 driver.get(url=url_form)
+
 sleep(1)
 
+#Selecionando elementos de input do Formulario de forma iteravel.
 for i in range(len(lista_enderecos)):
     inputs=driver.find_elements_by_css_selector('.zHQkBf')
     endereco=inputs[0]
     preco=inputs[1]
     link=inputs[2]
+#Inserindo dados no formuario
     if len(lista_enderecos[i][1])==0:
         endereco.send_keys(f'{lista_enderecos[i][0]}')
-        print(len(lista_enderecos[i][1]))
+      # print(len(lista_enderecos[i][1]))
     else:
         endereco.send_keys(f'{lista_enderecos[i][1]},{lista_enderecos[i][0]}')
     preco.send_keys(lista_valores[i])
