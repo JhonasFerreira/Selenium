@@ -3,9 +3,9 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
-web_drive_local='C:\DesenvolvimentoPy\chromedriver.exe'
-user='f_jhonas'
-senha='231064jh'
+web_drive_local=MY_PATH
+user=USUARIO
+senha=SENHA
 class InstagramBot:
     def __init__(self,path):
         self.driver=webdriver.Chrome(executable_path=path)
