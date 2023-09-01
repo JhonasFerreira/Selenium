@@ -7,8 +7,8 @@ from selenium.webdriver.common.by import By
 driver=webdriver.Chrome(executable_path='C:\DesenvolvimentoPy\chromedriver.exe')
 def logar():
     try:
-        email='jhonasferreira34@gmail.com'
-        senha='jhonas23jh'
+        email=''
+        senha=''
         site_linkedin='https://www.linkedin.com'
         driver.get(url=site_linkedin)
         sleep(3)
